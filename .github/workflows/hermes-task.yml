@@ -24,3 +24,4 @@ jobs:
         env:
           BASE_URL: ${{secrets.BASEURL}}
           WEBHOOKNAME: "github-issues"
+          BODY: ${{github.event.issue}}
