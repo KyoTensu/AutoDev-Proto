@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Send task to hermes agent
         run: |
-          curl -X POST -H "$TOKENID" -H "TOKEN" -H 'Content-Type: application/json' -d '$BODY' --insecure "$BASE_URL/webhooks/$WEBHOOKNAME"
+          curl -X POST -H "$TOKENID" -H "$TOKEN" -H 'Content-Type: application/json' -d '$BODY' --insecure "$BASE_URL/webhooks/$WEBHOOKNAME"
         env:
           BASE_URL: ${{secrets.BASEURL}}
           WEBHOOKNAME: "github-issues"
