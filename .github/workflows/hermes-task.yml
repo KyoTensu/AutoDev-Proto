@@ -21,9 +21,9 @@ jobs:
       - name: Send task to hermes agent
         # Using printf ensures no unintended newlines are added to the payload before hashing
         run: |
-          HASH=$(printf '%s' "$BODY" | openssl dgst -sha1 -hmac "$WEBHOOK_SECRET" | awk '{print $NF}')
-          SIGNATURE="sha1=$HASH"
-          curl -X POST -H "X-Hub-Signature: $SIGNATURE" -H "$TOKENID" -H "$TOKEN" -H 'Content-Type: application/json' -d '$BODY' --insecure "$BASE_URL/webhooks/$WEBHOOKNAME"
+          HASH=$(printf '%s' "$BODY" | openssl dgst -sha256 -hmac "$WEBHOOK_SECRET" | awk '{print $NF}')
+          SIGNATURE="sha256=$HASH"
+          curl -X POST -H "X-Hub-Signature-256: $SIGNATURE" -H "$TOKENID" -H "$TOKEN" -H "Content-Type: application/json" -d "$BODY" --insecure "$BASE_URL/webhooks/$WEBHOOKNAME"
         env:
           BASE_URL: ${{secrets.BASEURL}}
           WEBHOOKNAME: "github-issues"
