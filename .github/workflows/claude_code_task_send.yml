@@ -30,6 +30,6 @@ jobs:
           show_full_output: true
         env:
           ANTHROPIC_BASE_URL: https://openrouter.ai/api
-          ANTHROPIC_DEFAULT_OPUS_MODEL: anthropic/claude-opus-latest
-          ANTHROPIC_DEFAULT_SONNET_MODEL: anthropic/claude-sonnet-latest
-          ANTHROPIC_DEFAULT_HAIKU_MODEL: anthropic/claude-haiku-latest
+          ANTHROPIC_DEFAULT_OPUS_MODEL: anthropic/claude-opus-4.8
+          ANTHROPIC_DEFAULT_SONNET_MODEL: anthropic/claude-sonnet-5
+          ANTHROPIC_DEFAULT_HAIKU_MODEL: anthropic/claude-haiku-4.5
