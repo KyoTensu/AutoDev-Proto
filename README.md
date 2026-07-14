@@ -15,6 +15,17 @@ The first architecture idea is the following:
 - Have an admin either accept the PR, or comment on it to get the agent modify the PR
 - Repeat for every issues until all features are complete
 
-## Initial tools
+### Initial tools
 - GitHub actions for triggering, workflow and issues management
 - Hermes as the agent manager
+
+## First revision
+
+Due to issues with making either Hermes or OpenHands work correctly, I'm changing the setup for the moment:
+- I'm using Claude Code action, triggered on issues/PR comments
+- Claude Code is connected to OpenRouter for spending control and using non-Anthropic models
+- Claude Code pushes modifications in PRs (WIP)
+
+### Second toolset
+- GitHub actions for triggering workflow and issues managment
+- Claude Code Action for the agentic "harness"
