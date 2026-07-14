@@ -27,6 +27,7 @@ jobs:
           anthropic_api_key: ${{ secrets.OPENROUTER_API_KEY }}
           # Optional: limit which files the agent can modify
           # allowed_tools: "Read,Write,Edit,Bash,Glob,Grep"
+          show_full_output: true
         env:
           ANTHROPIC_BASE_URL: https://openrouter.ai/api
           ANTHROPIC_DEFAULT_OPUS_MODEL: anthropic/claude-opus-latest
