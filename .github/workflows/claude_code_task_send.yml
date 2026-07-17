@@ -30,6 +30,8 @@ jobs:
           # allowed_tools: "Read,Write,Edit,Bash,Glob,Grep"
           show_full_output: true
           base_branch: dev
+          claude_args: |
+            --allowedTools "Bash(gh *)"
         env:
           ANTHROPIC_BASE_URL: https://openrouter.ai/api
           ANTHROPIC_DEFAULT_OPUS_MODEL: anthropic/claude-opus-4.8
