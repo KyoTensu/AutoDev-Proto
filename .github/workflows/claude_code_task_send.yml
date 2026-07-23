@@ -41,6 +41,6 @@ jobs:
             --allowedTools "Bash(gh *)"
         env:
           ANTHROPIC_BASE_URL: https://openrouter.ai/api
-          ANTHROPIC_DEFAULT_OPUS_MODEL: anthropic/claude-opus-4.8
-          ANTHROPIC_DEFAULT_SONNET_MODEL: anthropic/claude-sonnet-5
-          ANTHROPIC_DEFAULT_HAIKU_MODEL: anthropic/claude-haiku-4.5
+          ANTHROPIC_DEFAULT_OPUS_MODEL: ${{ vars.OPENROUTER_OPUS_LEVEL_MODEL }}
+          ANTHROPIC_DEFAULT_SONNET_MODEL: ${{ vars.OPENROUTER_SONNET_LEVEL_MODEL }}
+          ANTHROPIC_DEFAULT_HAIKU_MODEL: ${{ vars.OPENROUTER_HAIKU_LEVEL_MODEL }}
