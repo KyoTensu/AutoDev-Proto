@@ -3,8 +3,8 @@ name: Claude Code Task Send
 on:
   issue_comment:
     types: [created]
-  pull_request_review_comment:
-    types: [created]
+  #pull_request_review_comment:
+  #  types: [created]
 
 jobs:
   claude:
@@ -31,9 +31,9 @@ jobs:
           show_full_output: true
           base_branch: dev
           prompt: |
-            Read the issue description and the comment that triggered this workflow.
+            Read the issue/pull request description and the comment that triggered this workflow.
             Implement the requested changes.
-            Create a new branch, commit your changes, and open a pull request.
+            Create a new branch, commit your changes, and open a pull request or modify the existing one.
             Reference the issue number in the PR description.
             If the request is unclear or too large, post a comment explaining what
             clarification you need instead of implementing.
@@ -41,6 +41,6 @@ jobs:
             --allowedTools "Bash(gh *)"
         env:
           ANTHROPIC_BASE_URL: https://openrouter.ai/api
-          ANTHROPIC_DEFAULT_OPUS_MODEL: anthropic/claude-opus-4.8
-          ANTHROPIC_DEFAULT_SONNET_MODEL: anthropic/claude-sonnet-5
-          ANTHROPIC_DEFAULT_HAIKU_MODEL: anthropic/claude-haiku-4.5
+          ANTHROPIC_DEFAULT_OPUS_MODEL: ${{ vars.OPENROUTER_OPUS_LEVEL_MODEL }}
+          ANTHROPIC_DEFAULT_SONNET_MODEL: ${{ vars.OPENROUTER_SONNET_LEVEL_MODEL }}
+          ANTHROPIC_DEFAULT_HAIKU_MODEL: ${{ vars.OPENROUTER_HAIKU_LEVEL_MODEL }}
