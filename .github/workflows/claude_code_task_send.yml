@@ -31,9 +31,9 @@ jobs:
           show_full_output: true
           base_branch: dev
           prompt: |
-            Read the issue description and the comment that triggered this workflow.
+            Read the issue/pull request description and the comment that triggered this workflow.
             Implement the requested changes.
-            Create a new branch, commit your changes, and open a pull request.
+            Create a new branch, commit your changes, and open a pull request or modify the existing one.
             Reference the issue number in the PR description.
             If the request is unclear or too large, post a comment explaining what
             clarification you need instead of implementing.
