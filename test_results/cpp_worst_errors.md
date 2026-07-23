@@ -137,6 +137,67 @@ Functions like malloc, fopen, and read can fail. Ignoring their return values ca
 --------------------------------------------
 A class that manages a resource and defines one of destructor, copy constructor, or copy assignment usually needs all of them (and the move operations in modern C++), or resources get double-freed or leaked. Prefer RAII types that need none of them.
 
+15. Dereferencing Null Pointers
+-------------------------------
+Following a null (or otherwise invalid) pointer is undefined behavior and usually crashes. Check before you dereference.
+
+    int *p = find(key);                  // Wrong
+    return *p;
+
+    int *p = find(key);                  // Right
+    if (p == nullptr) return -1;
+    return *p;
+
+16. Comparing Floating-Point Numbers with ==
+--------------------------------------------
+Rounding makes exact equality unreliable. Compare within a tolerance instead.
+
+    if (a == b) ...                      // Wrong
+
+    if (std::fabs(a - b) < 1e-9) ...     // Right
+
+17. Mismatched printf / scanf Format Specifiers
+-----------------------------------------------
+The format string must match the argument types, or you get garbage output or memory corruption.
+
+    long n = 5;                          // Wrong
+    printf("%d\n", n);
+    scanf("%d", &n);
+
+    long n = 5;                          // Right
+    printf("%ld\n", n);
+    scanf("%ld", &n);
+
+18. Using sizeof on a Pointer Instead of an Array
+-------------------------------------------------
+Arrays decay to pointers when passed to functions, so sizeof then measures the pointer, not the array.
+
+    void f(int arr[]) {                  // Wrong
+        int n = sizeof(arr) / sizeof(arr[0]);   // always sizeof(pointer)
+    }
+
+    void f(int arr[], size_t n) { ... }  // Right (pass the length explicitly)
+
+19. Unparenthesized Macro Arguments
+-----------------------------------
+Text substitution ignores operator precedence, so macro arguments and bodies need parentheses.
+
+    #define SQ(x) x * x                  // Wrong
+    int y = SQ(a + b);                   // expands to a + b * a + b
+
+    #define SQ(x) ((x) * (x))            // Right
+    int y = SQ(a + b);                   // or better: a constexpr function
+
+20. Modifying a Container While Iterating (C++)
+-----------------------------------------------
+Inserting or erasing invalidates iterators; using a stale iterator is undefined. Use the value erase returns.
+
+    for (auto it = v.begin(); it != v.end(); ++it)   // Wrong
+        if (*it == 0) v.erase(it);
+
+    for (auto it = v.begin(); it != v.end(); )       // Right
+        it = (*it == 0) ? v.erase(it) : it + 1;
+
 ---
 
 Avoiding these pitfalls leads to code that is more correct, safer, and maintainable.
